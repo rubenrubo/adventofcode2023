@@ -1,1 +1,4 @@
-console.log("test");
+
+export function ReadAsString(){
+  console.log("test");
+}
