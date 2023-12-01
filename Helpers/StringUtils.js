@@ -32,7 +32,6 @@ export function ConvertStringNumbersFromStringArray(input){
         line = line.replace(number, first + numberDict[number] + last);
       }
     });    
-    console.log(line);
     result.push(line);
   });
   return result;
