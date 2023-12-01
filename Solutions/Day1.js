@@ -5,20 +5,17 @@ import { Run } from "./SolutionBase.js";
 function PartOne() {
   const lines = SplitOnNewLines("day1part1.txt");
   const numbers = GetNumbersFromStringArray(lines);
-  let filteredNumbers = [];
-  numbers.forEach((element) => {
-    const first = ('' + element)[0];
-    const last = element % 10;
-    filteredNumbers.push(Number(first + last));
-  });
-  const sum = filteredNumbers.reduce((acc, a) => acc + a, 0);
-  return sum;
+  return Solve(numbers);
 }
 
 function PartTwo() {
   const lines = SplitOnNewLines("day1part1.txt");
   const stringNumbersToNumbers = ConvertStringNumbersFromStringArray(lines);
   const numbers = GetNumbersFromStringArray(stringNumbersToNumbers);
+  return Solve(numbers);
+}
+
+function Solve(numbers){
   let filteredNumbers = [];
   numbers.forEach((element) => {
     const first = ('' + element)[0];
