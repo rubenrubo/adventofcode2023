@@ -10,6 +10,14 @@ export function GetNumbersFromStringArray(input){
   return result;
 }
 
+export function GetNumberFromString(input){
+  const match = [...input].reduce((x, y) => (isNumber(y) ? x + y : x),"");
+  if(match){
+    return Number(match);
+  }
+  return 0;
+}
+
 export function ConvertStringNumbersFromStringArray(input){
   let result = [];
   const numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -38,6 +46,6 @@ export function ConvertStringNumbersFromStringArray(input){
 }
 
 function isNumber(input) {
-  const numbers = "123456789";
+  const numbers = "0123456789";
   return numbers.includes(input) ? true : false;
 }
