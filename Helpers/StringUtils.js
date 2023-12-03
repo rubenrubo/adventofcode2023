@@ -49,3 +49,7 @@ function isNumber(input) {
   const numbers = "0123456789";
   return numbers.includes(input) ? true : false;
 }
+
+export function CharIsNumber(c){
+  return (c >= '0' && c <= '9');
+}
