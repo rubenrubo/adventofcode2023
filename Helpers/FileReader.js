@@ -1,5 +1,14 @@
 import * as fs from 'fs';
 
+export function GetRawInput(fileName){
+  try {
+    const data = fs.readFileSync(`../PuzzleInputs/${fileName}`, { encoding: 'utf8' });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export function SplitOnNewLines(fileName) {
   try {
     const data = fs.readFileSync(`../PuzzleInputs/${fileName}`, { encoding: 'utf8' });
