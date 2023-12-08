@@ -53,3 +53,7 @@ function isNumber(input) {
 export function CharIsNumber(c){
   return (c >= '0' && c <= '9');
 }
+
+export function GetAmountOfCharInString(char, input){
+  return input.length - input.replaceAll(char, '').length;
+}

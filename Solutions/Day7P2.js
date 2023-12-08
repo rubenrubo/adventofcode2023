@@ -1,7 +1,10 @@
 import { SplitOnNewLines } from "../Helpers/FileReader.js";
+import { GetAmountOfCharInString } from "../Helpers/StringUtils.js";
 import { Run } from "./SolutionBase.js";
 
-function PartOne() {
+const joker = 'J';
+
+function PartTwo() {
   const hands = SplitOnNewLines("day7.txt");
 
   while (true) {
@@ -25,6 +28,9 @@ function PartOne() {
     const bid = hands[i].split(" ").pop();
     result += bid * (i + 1);
   }
+
+  // 249497242 too low
+  // 249504377 too low
   return result;
 }
 
@@ -80,12 +86,26 @@ function FirstHandHasHighestCard(firstHand, secondHand) {
 
 function IsFullHouse(input) {
   let uniq = "";
+  const hasJoker = input.includes(joker);
+
   for (let i = 0; i < input.length; i++) {
     if (!uniq.includes(input[i])) {
       uniq += input[i];
     }
   }
-  return uniq.length == 2;
+
+  if(hasJoker && uniq.length == 3){
+    return true;
+  }
+
+  if(uniq.length == 2){
+    if(GetAmountOfCharInString(uniq[0], input) == 4 || GetAmountOfCharInString(uniq[1], input) == 4){
+      return false;
+    }
+    return true;
+  }
+
+  return false;
 }
 
 function GetAmountOfSameInHand(input) {
@@ -93,7 +113,7 @@ function GetAmountOfSameInHand(input) {
   for (let i = 0; i < input.length; i++) { 
       let count = 0; 
       for (let j = 0; j < input.length; j++) { 
-          if (input[i] == input[j]) 
+          if (input[i] == input[j] || input[j] == joker) 
               count++; 
       } 
       if (count > maxcount) { 
@@ -103,9 +123,16 @@ function GetAmountOfSameInHand(input) {
   return maxcount; 
 }
 
+console.log(GetAmountOfSameInHand("K4AJT"));
+
 
 function GetAmountOfPairs(input) {
   let maxcount = 0; 
+  let jokers = (input.match(/J/g)||[]).length;
+  if(jokers == 3){
+    maxcount +=2;
+    jokers = 1;
+  }
   for (let i = 0; i < input.length; i++) { 
       let count = 0; 
       for (let j = 0; j < input.length; j++) { 
@@ -115,13 +142,20 @@ function GetAmountOfPairs(input) {
       } 
       if (count == 2) { 
         maxcount++;
-      } 
+      }
   } 
+  if(jokers > 0){
+    maxcount+=2;
+    jokers--;
+  }
   return maxcount / 2;
 }
 
+// console.log(GetAmountOfPairs("9JTQJ"));
+// "JJAJB"
+
 function GetCardValue(input) {
-  const order = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+  const order = ['J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A'];
   return order.indexOf(input);
 }
 
@@ -129,4 +163,4 @@ function GetFirstCharFromString(input) {
   return Array.from(input)[0];
 }
 
-Run("Day 6 part two", "Camel Cards", PartOne);
+// Run("Day 6 part two", "Camel Cards", PartTwo);
