@@ -9,3 +9,9 @@ export function PrintPuzzleSolution(solution){
 export function PrintRunTime(start, end){
   console.log(`--- Compute time: ${start - end}ms ---`)
 }
+
+export function PrintMap(map){
+  for(let y = 0; y < map.length; y++){
+    console.log(...map[y])
+  }
+}
